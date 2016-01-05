@@ -1,0 +1,7 @@
+packrat_collection:
+    resource: "@PackratBundle/Resources/config/routing/collection.yml"
+    prefix:   /
+
+packrat_homepage:
+    path:     /
+    defaults: { _controller: PackratBundle:Default:index }

@@ -1,0 +1,36 @@
+PackratBundle\Entity\Collection:
+    type: entity
+    table: null
+    repositoryClass: PackratBundle\Repository\CollectionRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        item:
+            type: string
+            length: 255
+        url:
+            type: string
+            length: 255
+            nullable: true
+        status:
+            type: string
+            length: 255
+        price:
+            type: integer
+            nullable: true
+        currency:
+            type: string
+            length: 255
+            nullable: true
+        shippingCost:
+            type: integer
+            nullable: true
+            column: shipping_cost
+        notes:
+            type: text
+            nullable: true
+    lifecycleCallbacks: {  }

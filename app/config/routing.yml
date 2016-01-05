@@ -1,0 +1,3 @@
+packrat:
+    resource: "@PackratBundle/Resources/config/routing.yml"
+    prefix:   /

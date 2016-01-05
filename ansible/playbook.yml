@@ -1,0 +1,27 @@
+---
+- name: Packrat Provisioning
+  hosts: all
+  sudo: yes
+
+  tasks:
+  - name: update packages
+    apt: update_cache=yes
+
+  - name: install packages
+    apt: name={{ item }} state=latest
+    with_items:
+      - vim
+      - php5-fpm
+      - php5-cli
+      - php5-intl
+      - mysql-server
+      - php5-mysql
+      - php5-xdebug
+      - nginx-light
+      - python-mysqldb
+
+  - name: create database
+    mysql_db: name=packrat state=present
+
+  - name: create database user
+    mysql_user: name=vagrant password=vagrant host=% priv=*.*:ALL state=present
