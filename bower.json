@@ -1,0 +1,21 @@
+{
+  "name": "packrat",
+  "homepage": "https://github.com/rgeraads/packrat",
+  "authors": [
+    "Randy Geraads <r.geraads@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}

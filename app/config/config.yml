@@ -36,13 +36,16 @@ framework:
 
 # Twig Configuration
 twig:
+    form_themes:
+        - 'bootstrap_3_horizontal_layout.html.twig'
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
 
 # Doctrine Configuration
 doctrine:
     dbal:
-        driver:   pdo_mysql
+        driver:   pdo_sqlite
+        path:     "sqlite.sql"
         host:     "%database_host%"
         port:     "%database_port%"
         dbname:   "%database_name%"

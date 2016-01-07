@@ -3,19 +3,15 @@
 {% block body %}
     <h1>Collection</h1>
 
-    <table>
+    <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ collection.id }}</td>
-            </tr>
             <tr>
                 <th>Item</th>
                 <td>{{ collection.item }}</td>
             </tr>
             <tr>
                 <th>Url</th>
-                <td>{{ collection.url }}</td>
+                <td><a href="{{ collection.url }}" target="_blank">{{ collection.url }}</a></td>
             </tr>
             <tr>
                 <th>Status</th>
@@ -23,15 +19,11 @@
             </tr>
             <tr>
                 <th>Price</th>
-                <td>{{ collection.price }}</td>
+                <td>{{ collection.currency }} {{ collection.price | number_format }}</td>
             </tr>
             <tr>
-                <th>Currency</th>
-                <td>{{ collection.currency }}</td>
-            </tr>
-            <tr>
-                <th>Shippingcost</th>
-                <td>{{ collection.shippingCost }}</td>
+                <th>Shipping cost</th>
+                <td>{{ collection.currency }} {{ collection.shippingCost | number_format }}</td>
             </tr>
             <tr>
                 <th>Notes</th>
@@ -40,16 +32,16 @@
         </tbody>
     </table>
 
-    <ul>
-        <li>
+    <ul class="btn-group">
+        <li class="btn btn-default">
             <a href="{{ path('collection_index') }}">Back to the list</a>
         </li>
-        <li>
+        <li class="btn btn-default">
             <a href="{{ path('collection_edit', { 'id': collection.id }) }}">Edit</a>
         </li>
         <li>
             {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
+                <input class="btn btn-danger" type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
     </ul>

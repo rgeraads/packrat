@@ -3,16 +3,14 @@
 {% block body %}
     <h1>Collection list</h1>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Item</th>
                 <th>Url</th>
                 <th>Status</th>
                 <th>Price</th>
-                <th>Currency</th>
-                <th>Shippingcost</th>
+                <th>Shipping cost</th>
                 <th>Notes</th>
                 <th>Actions</th>
             </tr>
@@ -20,20 +18,18 @@
         <tbody>
         {% for collection in collections %}
             <tr>
-                <td><a href="{{ path('collection_show', { 'id': collection.id }) }}">{{ collection.id }}</a></td>
-                <td>{{ collection.item }}</td>
-                <td>{{ collection.url }}</td>
+                <td><a href="{{ path('collection_show', { 'id': collection.id }) }}">{{ collection.item }}</a></td>
+                <td><a href="{{ collection.url }}" target="_blank">{{ collection.url }}</a></td>
                 <td>{{ collection.status }}</td>
-                <td>{{ collection.price }}</td>
-                <td>{{ collection.currency }}</td>
-                <td>{{ collection.shippingCost }}</td>
+                <td>{{ collection.currency }} {{ collection.price | number_format }}</td>
+                <td>{{ collection.currency }} {{ collection.shippingCost | number_format }}</td>
                 <td>{{ collection.notes }}</td>
                 <td>
-                    <ul>
-                        <li>
+                    <ul class="btn-group">
+                        <li class="btn btn-default">
                             <a href="{{ path('collection_show', { 'id': collection.id }) }}">show</a>
                         </li>
-                        <li>
+                        <li class="btn btn-default">
                             <a href="{{ path('collection_edit', { 'id': collection.id }) }}">edit</a>
                         </li>
                     </ul>
@@ -44,8 +40,8 @@
     </table>
 
     <ul>
-        <li>
-            <a href="{{ path('collection_new') }}">Create a new entry</a>
+        <li class="btn btn-primary">
+            <a class="text-info" href="{{ path('collection_new') }}">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}

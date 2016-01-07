@@ -28,17 +28,17 @@ class Collection
     private $status;
 
     /**
-     * @var int
-     */
-    private $price;
-
-    /**
      * @var string
      */
     private $currency;
 
     /**
-     * @var int
+     * @var float
+     */
+    private $price;
+
+    /**
+     * @var float
      */
     private $shippingCost;
 
@@ -131,30 +131,6 @@ class Collection
     }
 
     /**
-     * Set price
-     *
-     * @param integer $price
-     *
-     * @return Collection
-     */
-    public function setPrice($price)
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    /**
-     * Get price
-     *
-     * @return int
-     */
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    /**
      * Set currency
      *
      * @param string $currency
@@ -179,9 +155,33 @@ class Collection
     }
 
     /**
+     * Set price
+     *
+     * @param float $price
+     *
+     * @return Collection
+     */
+    public function setPrice($price)
+    {
+        $this->price = $price;
+
+        return $this;
+    }
+
+    /**
+     * Get price
+     *
+     * @return float
+     */
+    public function getPrice()
+    {
+        return $this->price;
+    }
+
+    /**
      * Set shippingCost
      *
-     * @param integer $shippingCost
+     * @param float $shippingCost
      *
      * @return Collection
      */
@@ -195,7 +195,7 @@ class Collection
     /**
      * Get shippingCost
      *
-     * @return int
+     * @return float
      */
     public function getShippingCost()
     {

@@ -19,15 +19,15 @@ PackratBundle\Entity\Collection:
         status:
             type: string
             length: 255
-        price:
-            type: integer
-            nullable: true
         currency:
             type: string
             length: 255
             nullable: true
+        price:
+            type: float
+            nullable: true
         shippingCost:
-            type: integer
+            type: float
             nullable: true
             column: shipping_cost
         notes:
