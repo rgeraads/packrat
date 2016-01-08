@@ -12,36 +12,25 @@
                 <th>Price</th>
                 <th>Shipping cost</th>
                 <th>Notes</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for collection in collections %}
             <tr>
-                <td><a href="{{ path('collection_show', { 'id': collection.id }) }}">{{ collection.item }}</a></td>
+                <td><a href="{{ path('collection_show', { 'id': collection.id }) }}">{{ collection.item }}</a> <a href="{{ path('collection_edit', { 'id': collection.id }) }}"><i class="material-icons">mode_edit</i></a></td>
                 <td><a href="{{ collection.url }}" target="_blank">{{ collection.url }}</a></td>
                 <td>{{ collection.status }}</td>
                 <td>{{ collection.currency }} {{ collection.price | number_format }}</td>
                 <td>{{ collection.currency }} {{ collection.shippingCost | number_format }}</td>
                 <td>{{ collection.notes }}</td>
-                <td>
-                    <ul class="btn-group">
-                        <li class="btn btn-default">
-                            <a href="{{ path('collection_show', { 'id': collection.id }) }}">show</a>
-                        </li>
-                        <li class="btn btn-default">
-                            <a href="{{ path('collection_edit', { 'id': collection.id }) }}">edit</a>
-                        </li>
-                    </ul>
-                </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
     <ul>
-        <li class="btn btn-primary">
-            <a class="text-info" href="{{ path('collection_new') }}">Create a new entry</a>
+        <li class="btn btn-default">
+            <a class="text-info" href="{{ path('collection_new') }}"><i class="material-icons">add_circle_outline</i></a>
         </li>
     </ul>
 {% endblock %}

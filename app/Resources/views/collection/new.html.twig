@@ -5,12 +5,12 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input class="btn btn-primary" type="submit" value="Create" />
+        <button class="btn btn-primary" type="submit"><i class="material-icons">save</i></button>
     {{ form_end(form) }}
 
     <ul>
         <li class="btn btn-default">
-            <a href="{{ path('collection_index') }}">Back to the list</a>
+            <a href="{{ path('collection_index') }}"><i class="material-icons">chevron_left</i></a>
         </li>
     </ul>
 {% endblock %}

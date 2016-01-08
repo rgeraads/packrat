@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Collection</h1>
+    <h1>
+        <a href="{{ path('collection_index') }}"><i class="material-icons">chevron_left</i></a>
+        {{ collection.item }}
+        <a href="{{ path('collection_edit', { 'id': collection.id }) }}"><i class="material-icons">mode_edit</i></a>
+    </h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Item</th>
-                <td>{{ collection.item }}</td>
-            </tr>
+    <div class="col-lg-3">
+        <a href="#" class="thumbnail">
+            <img src="http://placehold.it/200x200" alt="..." />
+            {#<i class="material-icons">add_a_photo</i>#}
+        </a>
+    </div>
+    <div class="col-lg-9">
+        <table class="table">
+            <tbody>
             <tr>
                 <th>Url</th>
                 <td><a href="{{ collection.url }}" target="_blank">{{ collection.url }}</a></td>
@@ -29,19 +36,13 @@
                 <th>Notes</th>
                 <td>{{ collection.notes }}</td>
             </tr>
-        </tbody>
-    </table>
-
-    <ul class="btn-group">
-        <li class="btn btn-default">
-            <a href="{{ path('collection_index') }}">Back to the list</a>
-        </li>
-        <li class="btn btn-default">
-            <a href="{{ path('collection_edit', { 'id': collection.id }) }}">Edit</a>
-        </li>
+            </tbody>
+        </table>
+    </div>
+    <ul class="btn-group list-inline">
         <li>
             {{ form_start(delete_form) }}
-                <input class="btn btn-danger" type="submit" value="Delete">
+            <button class="btn btn-danger" type="submit"><i class="material-icons">delete</i></button>
             {{ form_end(delete_form) }}
         </li>
     </ul>
