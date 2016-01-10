@@ -18,7 +18,7 @@
             <tbody>
             <tr>
                 <th>Url</th>
-                <td><a href="{{ collection.url }}" target="_blank">{{ collection.url }}</a></td>
+                <td><a href="{{ collection.url }}" title="{{ collection.url | length > 64 ? collection.url : '' }}" target="_blank">{{ collection.url | length > 64 ? collection.url | slice(0, 64) ~ '...' : collection.url }}</a></td>
             </tr>
             <tr>
                 <th>Status</th>
@@ -26,11 +26,11 @@
             </tr>
             <tr>
                 <th>Price</th>
-                <td>{{ collection.currency }} {{ collection.price | number_format }}</td>
+                <td>{{ collection.currency }} {{ collection.price | number_format(2) }}</td>
             </tr>
             <tr>
                 <th>Shipping cost</th>
-                <td>{{ collection.currency }} {{ collection.shippingCost | number_format }}</td>
+                <td>{{ collection.currency }} {{ collection.shippingCost | number_format(2) }}</td>
             </tr>
             <tr>
                 <th>Notes</th>
@@ -39,11 +39,8 @@
             </tbody>
         </table>
     </div>
-    <ul class="btn-group list-inline">
-        <li>
-            {{ form_start(delete_form) }}
-            <button class="btn btn-danger" type="submit"><i class="material-icons">delete</i></button>
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+
+    {{ form_start(delete_form) }}
+        <button class="btn btn-danger" type="submit"><i class="material-icons">delete</i></button>
+    {{ form_end(delete_form) }}
 {% endblock %}

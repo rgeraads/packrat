@@ -2,6 +2,7 @@
 
 namespace PackratBundle\Form;
 
+use PackratBundle\Entity\Collection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -44,7 +45,7 @@ class CollectionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'PackratBundle\Entity\Collection'
+            'data_class' => Collection::class
         ]);
     }
 }

@@ -25,6 +25,11 @@ class Collection
     /**
      * @var string
      */
+    private $imageLocation;
+
+    /**
+     * @var string
+     */
     private $status;
 
     /**
@@ -106,6 +111,25 @@ class Collection
         return $this->url;
     }
 
+    /**
+     * @param string $imageLocation
+     *
+     * @return Collection
+     */
+    public function setImageLocation($imageLocation)
+    {
+        $this->imageLocation = $imageLocation;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getImageLocation()
+    {
+        return $this->imageLocation;
+    }
     /**
      * Set status
      *

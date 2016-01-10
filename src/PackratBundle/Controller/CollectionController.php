@@ -2,11 +2,10 @@
 
 namespace PackratBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use PackratBundle\Entity\Collection;
 use PackratBundle\Form\CollectionType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Collection controller.
@@ -24,9 +23,9 @@ class CollectionController extends Controller
 
         $collections = $em->getRepository('PackratBundle:Collection')->findAll();
 
-        return $this->render('collection/index.html.twig', array(
+        return $this->render('collection/index.html.twig', [
             'collections' => $collections,
-        ));
+        ]);
     }
 
     /**
@@ -36,7 +35,7 @@ class CollectionController extends Controller
     public function newAction(Request $request)
     {
         $collection = new Collection();
-        $form = $this->createForm('PackratBundle\Form\CollectionType', $collection);
+        $form       = $this->createForm(CollectionType::class, $collection);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -44,13 +43,13 @@ class CollectionController extends Controller
             $em->persist($collection);
             $em->flush();
 
-            return $this->redirectToRoute('collection_show', array('id' => $collection->getId()));
+            return $this->redirectToRoute('collection_show', ['id' => $collection->getId()]);
         }
 
-        return $this->render('collection/new.html.twig', array(
+        return $this->render('collection/new.html.twig', [
             'collection' => $collection,
-            'form' => $form->createView(),
-        ));
+            'form'       => $form->createView(),
+        ]);
     }
 
     /**
@@ -61,10 +60,10 @@ class CollectionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($collection);
 
-        return $this->render('collection/show.html.twig', array(
-            'collection' => $collection,
+        return $this->render('collection/show.html.twig', [
+            'collection'  => $collection,
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -74,7 +73,7 @@ class CollectionController extends Controller
     public function editAction(Request $request, Collection $collection)
     {
         $deleteForm = $this->createDeleteForm($collection);
-        $editForm = $this->createForm('PackratBundle\Form\CollectionType', $collection);
+        $editForm   = $this->createForm(CollectionType::class, $collection);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -82,14 +81,14 @@ class CollectionController extends Controller
             $em->persist($collection);
             $em->flush();
 
-            return $this->redirectToRoute('collection_edit', array('id' => $collection->getId()));
+            return $this->redirectToRoute('collection_edit', ['id' => $collection->getId()]);
         }
 
-        return $this->render('collection/edit.html.twig', array(
-            'collection' => $collection,
-            'edit_form' => $editForm->createView(),
+        return $this->render('collection/edit.html.twig', [
+            'collection'  => $collection,
+            'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
-        ));
+        ]);
     }
 
     /**
@@ -120,9 +119,8 @@ class CollectionController extends Controller
     private function createDeleteForm(Collection $collection)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('collection_delete', array('id' => $collection->getId())))
+            ->setAction($this->generateUrl('collection_delete', ['id' => $collection->getId()]))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

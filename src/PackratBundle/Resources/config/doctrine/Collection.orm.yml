@@ -16,6 +16,11 @@ PackratBundle\Entity\Collection:
             type: string
             length: 255
             nullable: true
+        imageLocation:
+            type: string
+            length: 255
+            nullable: true
+            column: image_location
         status:
             type: string
             length: 255
