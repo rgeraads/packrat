@@ -3,9 +3,9 @@
 namespace PackratBundle\Entity;
 
 /**
- * Collection
+ * Item
  */
-class Collection
+class Item
 {
     /**
      * @var int
@@ -15,7 +15,7 @@ class Collection
     /**
      * @var string
      */
-    private $item;
+    private $name;
 
     /**
      * @var string
@@ -52,7 +52,6 @@ class Collection
      */
     private $notes;
 
-
     /**
      * Get id
      *
@@ -64,27 +63,27 @@ class Collection
     }
 
     /**
-     * Set item
+     * Set name
      *
-     * @param string $item
+     * @param string $name
      *
-     * @return Collection
+     * @return Item
      */
-    public function setItem($item)
+    public function setName($name)
     {
-        $this->item = $item;
+        $this->name = $name;
 
         return $this;
     }
 
     /**
-     * Get item
+     * Get name
      *
      * @return string
      */
-    public function getItem()
+    public function getName()
     {
-        return $this->item;
+        return $this->name;
     }
 
     /**
@@ -92,7 +91,7 @@ class Collection
      *
      * @param string $url
      *
-     * @return Collection
+     * @return Item
      */
     public function setUrl($url)
     {
@@ -114,7 +113,7 @@ class Collection
     /**
      * @param string $imageLocation
      *
-     * @return Collection
+     * @return Item
      */
     public function setImageLocation($imageLocation)
     {
@@ -130,12 +129,13 @@ class Collection
     {
         return $this->imageLocation;
     }
+
     /**
      * Set status
      *
      * @param string $status
      *
-     * @return Collection
+     * @return Item
      */
     public function setStatus($status)
     {
@@ -159,7 +159,7 @@ class Collection
      *
      * @param string $currency
      *
-     * @return Collection
+     * @return Item
      */
     public function setCurrency($currency)
     {
@@ -183,7 +183,7 @@ class Collection
      *
      * @param float $price
      *
-     * @return Collection
+     * @return Item
      */
     public function setPrice($price)
     {
@@ -207,7 +207,7 @@ class Collection
      *
      * @param float $shippingCost
      *
-     * @return Collection
+     * @return Item
      */
     public function setShippingCost($shippingCost)
     {
@@ -231,7 +231,7 @@ class Collection
      *
      * @param string $notes
      *
-     * @return Collection
+     * @return Item
      */
     public function setNotes($notes)
     {

@@ -1,0 +1,24 @@
+PackratBundle\Entity\ExchangeRate:
+    type: entity
+    table: null
+    repositoryClass: PackratBundle\Repository\ExchangeRateRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        currency:
+            type: string
+            length: 255
+            unique: true
+        toEur:
+            type: float
+            nullable: true
+            column: to_eur
+        lastUpdated:
+            type: datetime
+            nullable: true
+            column: last_updated
+    lifecycleCallbacks: {  }

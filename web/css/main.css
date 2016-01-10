@@ -1,3 +1,9 @@
+.truncate {
+    overflow: hidden;
+        white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
 a[target="_blank"]:after {
     font-family: 'Glyphicons Halflings', sans-serif;
     font-size: 0.8em;

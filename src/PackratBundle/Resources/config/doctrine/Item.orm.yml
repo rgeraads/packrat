@@ -1,7 +1,7 @@
-PackratBundle\Entity\Collection:
+PackratBundle\Entity\Item:
     type: entity
     table: null
-    repositoryClass: PackratBundle\Repository\CollectionRepository
+    repositoryClass: PackratBundle\Repository\ItemRepository
     id:
         id:
             type: integer
@@ -9,7 +9,7 @@ PackratBundle\Entity\Collection:
             generator:
                 strategy: AUTO
     fields:
-        item:
+        name:
             type: string
             length: 255
         url:

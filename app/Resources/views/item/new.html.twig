@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Collection creation</h1>
+    <h1>Add item</h1>
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
@@ -9,6 +9,6 @@
     {{ form_end(form) }}
 
     <button class="btn btn-default">
-        <a href="{{ path('collection_index') }}"><i class="material-icons">chevron_left</i></a>
+        <a href="{{ path('item_index') }}"><i class="material-icons">chevron_left</i></a>
     </button>
 {% endblock %}

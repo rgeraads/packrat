@@ -1,7 +1,23 @@
-packrat_collection:
-    resource: "@PackratBundle/Resources/config/routing/collection.yml"
+packrat_item:
+    resource: "@PackratBundle/Resources/config/routing/item.yml"
     prefix:   /
 
 packrat_homepage:
     path:     /
     defaults: { _controller: PackratBundle:Default:index }
+
+exchangerate_add:
+    path:     /add/{currency}
+    defaults: { _controller: PackratBundle:ExchangeRate:add }
+
+exchangerate_add_all:
+    path:     /add-all
+    defaults: { _controller: PackratBundle:ExchangeRate:addAll }
+
+exchangerate_refresh:
+    path:     /refresh/{currency}
+    defaults: { _controller: PackratBundle:ExchangeRate:refresh }
+
+exchangerate_refresh_all:
+    path:     /refresh-all
+    defaults: { _controller: PackratBundle:ExchangeRate:refreshAll }
