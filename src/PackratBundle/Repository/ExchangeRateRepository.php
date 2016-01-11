@@ -2,7 +2,9 @@
 
 namespace PackratBundle\Repository;
 
-use Packrat\Item\ExchangeRate;
+use GuzzleHttp\Client;
+use Packrat\ExchangeRate\ExchangeRateRetriever;
+use Money\Currency;
 
 /**
  * ExchangeRateRepository
@@ -12,7 +14,7 @@ use Packrat\Item\ExchangeRate;
  */
 class ExchangeRateRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function add(string $currency)
+    public function add(Currency $currency)
     {
         $em = $this->getEntityManager();
 
@@ -27,7 +29,7 @@ class ExchangeRateRepository extends \Doctrine\ORM\EntityRepository
 
     public function addAll()
     {
-        $exchangeRate = new ExchangeRate();
+        $exchangeRate = new ExchangeRateRetriever(new Client());
         $currencies = $exchangeRate->getAllCurrencies();
 
         foreach ($currencies as $currency) {
@@ -35,7 +37,7 @@ class ExchangeRateRepository extends \Doctrine\ORM\EntityRepository
         }
     }
 
-    public function refresh(string $currency)
+    public function refresh(Currency $currency)
     {
         $query = $this->getEntityManager()
             ->createQuery(
@@ -59,10 +61,10 @@ class ExchangeRateRepository extends \Doctrine\ORM\EntityRepository
         }
     }
 
-    private function getExchangeRateFor($currency)
+    private function getExchangeRateFor(Currency $currency)
     {
-        $exchangeRate = new ExchangeRate();
+        $exchangeRate = new ExchangeRateRetriever(new Client());
 
-        return $exchangeRate->getForCurrency($currency);
+        return $exchangeRate->getFor($currency);
     }
 }

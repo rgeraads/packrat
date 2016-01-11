@@ -2,12 +2,12 @@
 
 namespace PackratBundle\Controller;
 
-use PackratBundle\Entity\ExchangeRate;
+use Money\Currency;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class ExchangeRateController extends Controller
 {
-    public function addAction(string $currency)
+    public function addAction(Currency $currency)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -27,6 +27,8 @@ class ExchangeRateController extends Controller
 
     public function refreshAction(string $currency)
     {
+        $currency = new Currency($currency);
+
         $em = $this->getDoctrine()->getManager();
 
         $em->getRepository('PackratBundle:ExchangeRate')->refresh($currency);
