@@ -31,7 +31,8 @@
         "beberlei/assert": "^2.4",
         "mathiasverraes/money": "^1.2",
         "league/flysystem": "^1.0",
-        "guzzlehttp/guzzle": "^6.1"
+        "guzzlehttp/guzzle": "^6.1",
+        "friendsofsymfony/user-bundle": "~2.0@dev"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -1,6 +1,6 @@
 <?php
 
-namespace Packrat\Item;
+namespace Packrat;
 
 use Money\Currency;
 use Money\CurrencyPair;

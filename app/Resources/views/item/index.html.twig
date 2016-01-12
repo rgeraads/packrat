@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {% if is_granted('ROLE_USER') %}
+        Hi {{ app.user.username }}
+    {% endif %}
     <h1>Item list</h1>
 
     <table class="table">
