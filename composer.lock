@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6c0aa1249a2d70384a21352fe9b82f57",
-    "content-hash": "94a8743eafe8b9bc4c341631481e6da4",
+    "hash": "4583cce65643ea899a5d43bca035c8cc",
+    "content-hash": "487e0239095db7f0204c51c1cd2cfb3a",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1182,16 +1182,16 @@
         },
         {
             "name": "mathiasverraes/money",
-            "version": "dev-master",
+            "version": "1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mathiasverraes/money.git",
-                "reference": "eae6e04"
+                "reference": "b9e258119041fed20e4704f72e3ebb94ed10bea2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mathiasverraes/money/zipball/2dd30e0bf6c2dc5b47036580ec68116ba2df56c0",
-                "reference": "eae6e04",
+                "url": "https://api.github.com/repos/mathiasverraes/money/zipball/b9e258119041fed20e4704f72e3ebb94ed10bea2",
+                "reference": "b9e258119041fed20e4704f72e3ebb94ed10bea2",
                 "shasum": ""
             },
             "require": {
@@ -1233,7 +1233,7 @@
                 "Value Object",
                 "money"
             ],
-            "time": "2015-12-11 15:02:28"
+            "time": "2014-10-07 12:54:10"
         },
         {
             "name": "monolog/monolog",
@@ -2350,9 +2350,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "mathiasverraes/money": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

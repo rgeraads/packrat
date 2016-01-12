@@ -13,6 +13,7 @@
     },
     "autoload-dev": {
         "psr-4": {
+            "\\": "src/",
             "Tests\\": "tests/"
         }
     },
@@ -28,7 +29,7 @@
         "sensio/framework-extra-bundle": "^3.0.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "beberlei/assert": "^2.4",
-        "mathiasverraes/money": "dev-master##eae6e04",
+        "mathiasverraes/money": "^1.2",
         "league/flysystem": "^1.0",
         "guzzlehttp/guzzle": "^6.1"
     },

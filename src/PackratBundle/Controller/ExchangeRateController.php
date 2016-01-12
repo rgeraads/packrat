@@ -25,10 +25,8 @@ class ExchangeRateController extends Controller
         return $this->redirect('PackratBundle:Item:index.html.twig');
     }
 
-    public function refreshAction(string $currency)
+    public function refreshAction(Currency $currency)
     {
-        $currency = new Currency($currency);
-
         $em = $this->getDoctrine()->getManager();
 
         $em->getRepository('PackratBundle:ExchangeRate')->refresh($currency);

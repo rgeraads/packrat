@@ -7,3 +7,8 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+#
+  currency_converter:
+      class:        PackratBundle\ParamConverter\CurrencyConverter
+      tags:
+          - { name: request.param_converter, priority: -2, converter: currency_converter }
