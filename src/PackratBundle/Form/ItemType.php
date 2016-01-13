@@ -23,23 +23,23 @@ class ItemType extends AbstractType
             ->add('url', UrlType::class)
             ->add('status', ChoiceType::class, [
                 'choices'           => [
-                    'not owned'       => 'not owned',
-                    'to be announced' => 'to be announced',
-                    'pre-ordered'     => 'pre-ordered',
-                    'ordered'         => 'ordered',
-                    'paid'            => 'Paid',
-                    'shipped'         => 'shipped',
-                    'owned'           => 'owned',
-                    'unavailable'     => 'unavailable',
+                    'Not owned'       => 'not owned',
+                    'To be announced' => 'to be announced',
+                    'Pre-ordered'     => 'pre-ordered',
+                    'Ordered'         => 'ordered',
+                    'Paid'            => 'Paid',
+                    'Shipped'         => 'shipped',
+                    'Owned'           => 'owned',
+                    'Unavailable'     => 'unavailable',
                 ],
                 'choices_as_values' => true,
             ])
             ->add('currency', ChoiceType::class, [
                 'choices' => [
-                    'EUR' => 'EUR',
-                    'USD' => 'USD',
-                    'GBP' => 'GBP',
-                    'JPY' => 'JPY',
+                    '€' => 'EUR',
+                    '$' => 'USD',
+                    '£' => 'GBP',
+                    '¥' => 'JPY',
                 ]
             ])
             ->add('price', MoneyType::class, [
