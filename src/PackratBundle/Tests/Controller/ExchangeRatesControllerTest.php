@@ -12,5 +12,4 @@ class ExchangeRateControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/refresh');
     }
-
 }

@@ -45,7 +45,17 @@ class Item
     /**
      * @var float
      */
+    private $priceInEuro;
+
+    /**
+     * @var float
+     */
     private $shippingCost;
+
+    /**
+     * @var float
+     */
+    private $shippingCostInEuro;
 
     /**
      * @var string
@@ -249,5 +259,36 @@ class Item
     {
         return $this->notes;
     }
-}
 
+    /**
+     * @return float
+     */
+    public function getPriceInEuro()
+    {
+        return $this->priceInEuro;
+    }
+
+    /**
+     * @param float $priceInEuro
+     */
+    public function setPriceInEuro($priceInEuro)
+    {
+        $this->priceInEuro = $priceInEuro;
+    }
+
+    /**
+     * @return float
+     */
+    public function getShippingCostInEuro()
+    {
+        return $this->shippingCostInEuro;
+    }
+
+    /**
+     * @param float $shippingCostInEuro
+     */
+    public function setShippingCostInEuro($shippingCostInEuro)
+    {
+        $this->shippingCostInEuro = $shippingCostInEuro;
+    }
+}

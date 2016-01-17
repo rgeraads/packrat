@@ -4,7 +4,7 @@ namespace Packrat;
 
 use Money\Currency;
 use Money\CurrencyPair;
-use Packrat\ExchangeRate\ExchangeRateRetriever;
+use ExchangeRate\ExchangeRateRetriever;
 
 final class CurrencyConverter
 {
@@ -18,8 +18,10 @@ final class CurrencyConverter
         $this->exchangeRate = $exchangeRate;
     }
 
-    public function convert(Currency $currency): CurrencyPair
+    public function convert(Currency $baseCurrency, Currency $currency): CurrencyPair
     {
-        new CurrencyPair(new Currency('EUR'), new Currency($currency), $this->exchangeRate->getFor($currency));
+        $exchangeRate = $this->exchangeRate->getFor($currency);
+
+        return new CurrencyPair(new Currency($baseCurrency), new Currency($currency), $exchangeRate);
     }
 }

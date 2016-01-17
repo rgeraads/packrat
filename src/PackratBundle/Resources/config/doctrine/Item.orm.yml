@@ -31,10 +31,18 @@ PackratBundle\Entity\Item:
         price:
             type: float
             nullable: true
+        priceInEuro:
+            type: float
+            nullable: true
+            column: price_in_euro
         shippingCost:
             type: float
             nullable: true
             column: shipping_cost
+        shippingCostInEuro:
+            type: float
+            nullable: true
+            column: shipping_cost_in_euro
         notes:
             type: text
             nullable: true

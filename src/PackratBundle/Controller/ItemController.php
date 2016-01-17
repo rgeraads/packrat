@@ -63,7 +63,8 @@ class ItemController extends Controller
         $exchangeRate = '';
         if ($item->getCurrency() !== 'EUR') {
             $em           = $this->getDoctrine()->getManager();
-            $exchangeRate = $em->getRepository('PackratBundle:ExchangeRate')->findOneBy(['currency' => $item->getCurrency()])->getToEur();
+            $exchangeRate = $em->getRepository('PackratBundle:ExchangeRate')
+                ->findOneBy(['currency' => $item->getCurrency()])->getToEur();
         }
 
         return $this->render('item/show.html.twig', [

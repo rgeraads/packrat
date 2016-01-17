@@ -101,4 +101,3 @@ class ExchangeRate
         return $this->lastUpdated;
     }
 }
-

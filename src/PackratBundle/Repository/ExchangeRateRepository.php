@@ -3,9 +3,9 @@
 namespace PackratBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use ExchangeRate\FixerIoExchangeRateRetriever;
 use GuzzleHttp\Client;
 use Money\Currency;
-use Packrat\ExchangeRate\CurrencyConverterApiExchangeRateRetriever;
 use PackratBundle\Entity\ExchangeRate;
 
 /**
@@ -31,7 +31,7 @@ class ExchangeRateRepository extends EntityRepository
 
     public function addAll()
     {
-        $exchangeRate = new CurrencyConverterApiExchangeRateRetriever(new Client());
+        $exchangeRate = new FixerIoExchangeRateRetriever(new Client(), new Currency('EUR'));
         $currencies   = $exchangeRate->getAllCurrencies();
 
         foreach ($currencies as $currency) {
@@ -76,7 +76,7 @@ class ExchangeRateRepository extends EntityRepository
      */
     private function getExchangeRateFor(Currency $currency)
     {
-        $exchangeRate = new CurrencyConverterApiExchangeRateRetriever(new Client());
+        $exchangeRate = new FixerIoExchangeRateRetriever(new Client(), new Currency('EUR'));
 
         return $exchangeRate->getFor($currency);
     }
