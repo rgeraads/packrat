@@ -2,10 +2,11 @@
 
 namespace Packrat;
 
+use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Money\Currency;
 use Money\Money;
 
-final class Item
+final class Item extends EventSourcedAggregateRoot
 {
     private $id;
     private $name;
@@ -17,7 +18,11 @@ final class Item
     private $shippingCost;
     private $notes;
 
-    public function __construct(
+    private function __construct()
+    {
+    }
+
+    private function initialize(
         ItemId $id,
         string $name,
         $image,
@@ -39,48 +44,21 @@ final class Item
         $this->notes        = $notes;
     }
 
-    public function getId(): ItemId
+    public function getAggregateRootId(): ItemId
     {
         return $this->id;
     }
 
-    public function getName(): string
+    public static function create()
     {
-        return $this->name;
+
     }
 
-    public function getImage()
+    protected function applyNewItemCreated(NewItemCreated $event)
     {
-        return $this->image;
-    }
-
-    public function getStore()
-    {
-        return $this->store;
-    }
-
-    public function getStatus()
-    {
-        return $this->status;
-    }
-
-    public function getCurrency(): Currency
-    {
-        return $this->currency;
-    }
-
-    public function getPrice(): Money
-    {
-        return $this->price;
-    }
-
-    public function getShippingCost(): Money
-    {
-        return $this->shippingCost;
-    }
-
-    public function getNotes()
-    {
-        return $this->notes;
+        $this->initialize(
+            $event->getItemId(),
+            $event->getItemName()
+        );
     }
 }
