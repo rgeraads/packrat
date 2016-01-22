@@ -5,6 +5,9 @@ namespace Packrat;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Money\Currency;
 use Money\Money;
+use Packrat\Item\ItemId;
+use Packrat\Item\ItemName;
+use Packrat\Item\Status;
 
 final class Item extends EventSourcedAggregateRoot
 {
@@ -24,14 +27,14 @@ final class Item extends EventSourcedAggregateRoot
 
     private function initialize(
         ItemId $id,
-        string $name,
-        $image,
-        $store,
-        $status,
-        Currency $currency,
-        Money $price,
-        Money $shippingCost,
-        $notes
+        ItemName $name,
+        Image $image = null,
+        Store $store = null,
+        Status $status = null,
+        Currency $currency = null,
+        Money $price = null,
+        Money $shippingCost = null,
+        string $notes = null
     ) {
         $this->id           = $id;
         $this->name         = $name;
@@ -49,12 +52,21 @@ final class Item extends EventSourcedAggregateRoot
         return $this->id;
     }
 
-    public static function create()
+    public static function create(ItemId $itemId, ItemName $itemName)
     {
+        $item = new Item();
 
+        $item->apply(new ItemCreated($itemId, $itemName));
     }
 
-    protected function applyNewItemCreated(NewItemCreated $event)
+    public function setStatus(Status $status)
+    {
+        $item = new Item();
+
+        $item->apply(new StatusUpdated($status));
+    }
+
+    protected function applyNewItemCreated(ItemCreated $event)
     {
         $this->initialize(
             $event->getItemId(),

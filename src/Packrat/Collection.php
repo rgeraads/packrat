@@ -3,6 +3,7 @@
 namespace Packrat;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
+use Packrat\Collection\CollectionId;
 use Packrat\Event\CollectionRemoved;
 use Packrat\Event\CollectionStarted;
 use Packrat\Event\ItemAddedToCollection;

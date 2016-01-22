@@ -2,7 +2,7 @@
 
 namespace Packrat\Command;
 
-use Packrat\CollectionId;
+use Packrat\Collection\CollectionId;
 use Packrat\UserId;
 
 final class RemoveCollection

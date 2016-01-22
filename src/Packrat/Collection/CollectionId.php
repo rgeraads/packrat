@@ -1,10 +1,10 @@
 <?php
 
-namespace Packrat;
+namespace Packrat\Collection;
 
 use Rhumsaa\Uuid\Uuid;
 
-final class ItemId
+final class CollectionId
 {
     public static function generate(): self
     {

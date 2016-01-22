@@ -2,7 +2,7 @@
 
 namespace Packrat\Event;
 
-use Packrat\CollectionId;
+use Packrat\Collection\CollectionId;
 use Packrat\UserId;
 
 final class CollectionStarted
