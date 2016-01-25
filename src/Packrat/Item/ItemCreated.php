@@ -1,9 +1,6 @@
 <?php
 
-namespace Packrat;
-
-use Packrat\Item\ItemId;
-use Packrat\Item\ItemName;
+namespace Packrat\Item;
 
 final class ItemCreated
 {

@@ -1,13 +1,10 @@
 <?php
 
-namespace Packrat;
+namespace Packrat\Collection;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
-use Packrat\Collection\CollectionId;
-use Packrat\Event\CollectionRemoved;
-use Packrat\Event\CollectionStarted;
-use Packrat\Event\ItemAddedToCollection;
-use Packrat\Event\ItemRemovedFromCollection;
+use Packrat\Item\Item;
+use Packrat\User\UserId;
 
 final class Collection extends EventSourcedAggregateRoot
 {
@@ -30,11 +27,13 @@ final class Collection extends EventSourcedAggregateRoot
         return $this->id;
     }
 
-    public static function start(CollectionId $collectionId, UserId $userId)
+    public static function start(CollectionId $collectionId, CollectionName $collectionName, UserId $userId): Collection
     {
         $collection = new Collection();
 
-        $collection->apply(new CollectionStarted($collectionId, $userId));
+        $collection->apply(new CollectionStarted($collectionId, $collectionName, $userId));
+
+        return $collection;
     }
 
     public static function remove(CollectionId $collectionId, UserId $userId)

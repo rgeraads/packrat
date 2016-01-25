@@ -1,6 +1,6 @@
 <?php
 
-namespace Packrat;
+namespace Packrat\User;
 
 use Rhumsaa\Uuid\Uuid;
 

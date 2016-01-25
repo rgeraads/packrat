@@ -1,9 +1,8 @@
 <?php
 
-namespace Packrat\Event;
+namespace Packrat\Collection;
 
-use Packrat\Collection\CollectionId;
-use Packrat\Item;
+use Packrat\Item\Item;
 
 final class ItemAddedToCollection
 {
