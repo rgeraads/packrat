@@ -1,9 +1,8 @@
 <?php
 
-namespace Packrat\Command;
+namespace Packrat\Collection;
 
-use Packrat\Collection\CollectionId;
-use Packrat\UserId;
+use Packrat\User\UserId;
 
 final class RemoveCollection
 {
