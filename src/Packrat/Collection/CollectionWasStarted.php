@@ -2,22 +2,20 @@
 
 namespace Packrat\Collection;
 
-use Packrat\User\UserId;
-
-final class CollectionStarted
+final class CollectionWasStarted
 {
     private $collectionId;
     private $collectionName;
     private $userId;
 
-    public function __construct(CollectionId $collectionId, CollectionName $collectionName, UserId $userId)
+    public function __construct(Id $collectionId, CollectionName $collectionName, Id $userId)
     {
         $this->collectionId   = $collectionId;
         $this->collectionName = $collectionName;
         $this->userId         = $userId;
     }
 
-    public function getCollectionId(): CollectionId
+    public function getCollectionId(): Id
     {
         return $this->collectionId;
     }
@@ -27,7 +25,7 @@ final class CollectionStarted
         return $this->collectionName;
     }
 
-    public function getUserId(): UserId
+    public function getUserId(): Id
     {
         return $this->userId;
     }

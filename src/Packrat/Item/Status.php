@@ -6,19 +6,21 @@ use Assert\Assertion as Assert;
 
 final class Status
 {
-    const NOT_OWNED   = 'notOwned';
-    const TBA         = 'toBeAnnounced';
-    const PRE_ORDERED = 'preOrdered';
-    const ORDERED     = 'ordered';
-    const PAID        = 'paid';
-    const SHIPPED     = 'shipped';
-    const CUSTOMS     = 'customs';
-    const OWNED       = 'owned';
-    const UNAVAILABLE = 'unavailable';
+    const NOT_OWNED       = 'notOwned';
+    const TO_BE_ANNOUNCED = 'toBeAnnounced';
+    const PRE_ORDERED     = 'preOrdered';
+    const ORDERED         = 'ordered';
+    const PAID            = 'paid';
+    const SHIPPED         = 'shipped';
+    const CUSTOMS         = 'customs';
+    const OWNED           = 'owned';
+    const UNAVAILABLE     = 'unavailable';
+    const CANCELLED       = 'cancelled';
+    const UNKNOWN         = 'unknown';
 
     const AVAILABLE_STATUSES = [
         self::NOT_OWNED,
-        self::TBA,
+        self::TO_BE_ANNOUNCED,
         self::PRE_ORDERED,
         self::ORDERED,
         self::PAID,
@@ -26,6 +28,8 @@ final class Status
         self::CUSTOMS,
         self::OWNED,
         self::UNAVAILABLE,
+        self::CANCELLED,
+        self::UNKNOWN,
     ];
 
     private $status;
@@ -44,7 +48,7 @@ final class Status
 
     public static function toBeAnnounced(): self
     {
-        return new self(self::TBA);
+        return new self(self::TO_BE_ANNOUNCED);
     }
 
     public static function preOrdered(): self
@@ -80,6 +84,16 @@ final class Status
     public static function unavailable(): self
     {
         return new self(self::UNAVAILABLE);
+    }
+
+    public static function cancelled(): self
+    {
+        return new self(self::CANCELLED);
+    }
+
+    public static function unknown(): self
+    {
+        return new self(self::UNKNOWN);
     }
 
     public function __toString(): string

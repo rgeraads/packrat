@@ -4,20 +4,20 @@ namespace Packrat\Item;
 
 use Assert\Assertion as Assert;
 
-final class ItemName
+final class Name
 {
-    private $itemName;
+    private $name;
 
     public function __construct(string $itemName)
     {
         $this->guardMaxNameLength($itemName);
 
-        $this->itemName = $itemName;
+        $this->name = $itemName;
     }
 
     public function __toString(): string
     {
-        return $this->itemName;
+        return $this->name;
     }
 
     private function guardMaxNameLength(string $itemName)

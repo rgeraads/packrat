@@ -18,7 +18,7 @@ final class Category
 
     private $category;
 
-    public function __construct(string $category)
+    private function __construct(string $category)
     {
         Assert::inArray($category, self::AVAILABLE_CATEGORIES);
 

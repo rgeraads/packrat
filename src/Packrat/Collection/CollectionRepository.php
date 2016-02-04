@@ -23,7 +23,7 @@ class CollectionRepository extends EventSourcingRepository
         );
     }
 
-    public function findById(CollectionId $collectionId): Collection
+    public function findById(Id $collectionId): Collection
     {
         return $this->load((string) $collectionId);
     }

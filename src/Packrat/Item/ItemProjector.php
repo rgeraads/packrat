@@ -6,7 +6,7 @@ use Broadway\ReadModel\Projector;
 
 class ItemProjector extends Projector
 {
-    public function applyItemCreated(ItemCreated $event)
+    public function applyItemCreated(ItemWasCreated $event)
     {
         $readModel = new ItemReadModel();
 

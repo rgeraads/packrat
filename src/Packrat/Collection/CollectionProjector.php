@@ -6,7 +6,7 @@ use Broadway\ReadModel\Projector;
 
 class CollectionProjector extends Projector
 {
-    public function applyCollectionStarted(CollectionStarted $event)
+    public function applyCollectionStarted(CollectionWasStarted $event)
     {
         $readModel = new CollectionReadModel();
 
