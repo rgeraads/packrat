@@ -2,9 +2,9 @@
 
 namespace Packrat;
 
+use ExchangeRate\ExchangeRateRetriever;
 use Money\Currency;
 use Money\CurrencyPair;
-use ExchangeRate\ExchangeRateRetriever;
 
 final class CurrencyConverter
 {

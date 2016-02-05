@@ -1,10 +1,10 @@
 <?php
 
-namespace Packrat\Collection;
+namespace Packrat\Item;
 
 use Assert\Assertion as Assert;
 
-final class CollectionName
+final class ItemName
 {
     private $name;
 

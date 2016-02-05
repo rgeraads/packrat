@@ -4,7 +4,7 @@ namespace Packrat\Collection;
 
 use Rhumsaa\Uuid\Uuid;
 
-final class Id
+final class CollectionId
 {
     public static function generate(): self
     {

@@ -2,18 +2,16 @@
 
 namespace Packrat\Item;
 
-use Money\Money;
-
 final class ShippingCostsOfItemWereUpdated
 {
     private $shippingCosts;
 
-    public function __construct(Money $shippingCosts)
+    public function __construct(ShippingCosts $shippingCosts)
     {
         $this->shippingCosts = $shippingCosts;
     }
 
-    public function getShippingCosts(): Money
+    public function getShippingCosts(): ShippingCosts
     {
         return $this->shippingCosts;
     }

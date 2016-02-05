@@ -32,7 +32,8 @@
         "rgeraads/exchangerate": "^1.0",
         "guzzlehttp/guzzle": "^6.1",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "broadway/broadway": "^0.8.0"
+        "broadway/broadway": "^0.8.0",
+        "league/flysystem": "^1.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

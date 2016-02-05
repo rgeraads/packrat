@@ -10,14 +10,14 @@ final class StartCollection
     private $collectionName;
     private $userId;
 
-    public function __construct(Id $collectionId, CollectionName $collectionName, UserId $userId)
+    public function __construct(CollectionId $collectionId, CollectionName $collectionName, UserId $userId)
     {
         $this->collectionId   = $collectionId;
         $this->collectionName = $collectionName;
         $this->userId         = $userId;
     }
 
-    public function getCollectionId(): Id
+    public function getCollectionId(): CollectionId
     {
         return $this->collectionId;
     }

@@ -2,18 +2,16 @@
 
 namespace Packrat\Item;
 
-use Packrat\Collection\Id;
-
 final class ItemWasDeleted
 {
     private $itemId;
 
-    public function __construct(Id $itemId)
+    public function __construct(ItemId $itemId)
     {
         $this->itemId = $itemId;
     }
 
-    public function getItemId(): Id
+    public function getItemId(): ItemId
     {
         return $this->itemId;
     }

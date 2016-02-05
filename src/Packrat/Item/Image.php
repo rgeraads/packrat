@@ -4,16 +4,16 @@ namespace Packrat\Item;
 
 use League\Flysystem\Adapter\Local;
 use League\Flysystem\Filesystem;
-use Packrat\Collection\Id;
+use Rhumsaa\Uuid\Uuid;
 
 final class Image
 {
-    private $id;
+    private $imageId;
     private $contents;
 
-    private function __construct(Id $id, string $contents)
+    private function __construct(Uuid $imageId, string $contents)
     {
-        $this->id       = $id;
+        $this->imageId  = $imageId;
         $this->contents = $contents;
     }
 
@@ -27,12 +27,12 @@ final class Image
             throw new CouldNotReadImageFromPath();
         }
 
-        return new Image(id::generate(), $image);
+        return new Image(Uuid::uuid4(), $image);
     }
 
-    public function getId(): Id
+    public function getId(): Uuid
     {
-        return $this->id;
+        return $this->imageId;
     }
 
     public function getContents(): string

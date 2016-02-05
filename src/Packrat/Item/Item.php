@@ -3,13 +3,11 @@
 namespace Packrat\Item;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
-use Money\Money;
-use Packrat\Collection\Id;
 
 final class Item extends EventSourcedAggregateRoot
 {
-    private $id;
-    private $name;
+    private $itemId;
+    private $itemName;
 
     /**
      * @var Image[]
@@ -24,22 +22,38 @@ final class Item extends EventSourcedAggregateRoot
     {
     }
 
-    private function initialize(Id $id, Name $name)
-    {
-        $this->id   = $id;
-        $this->name = $name;
+    private function initialize(
+        ItemId $itemId,
+        ItemName $itemName,
+        Status $status,
+        Price $price,
+        ShippingCosts $shippingCosts,
+        Notes $notes
+    ) {
+        $this->itemId        = $itemId;
+        $this->itemName      = $itemName;
+        $this->status        = $status;
+        $this->price         = $price;
+        $this->shippingCosts = $shippingCosts;
+        $this->notes         = $notes;
     }
 
-    public function getAggregateRootId(): Id
+    public function getAggregateRootId(): ItemId
     {
-        return $this->id;
+        return $this->itemId;
     }
 
-    public static function create(Id $id, Name $itemName)
-    {
+    public static function create(
+        ItemId $itemId,
+        ItemName $itemName,
+        Status $status,
+        Price $price,
+        ShippingCosts $shippingCosts,
+        Notes $notes
+    ) {
         $item = new Item();
 
-        $item->apply(new ItemWasCreated($id, $itemName));
+        $item->apply(new ItemWasCreated($itemId, $itemName, $status, $price, $shippingCosts, $notes));
     }
 
     public function addImage(Image $image)
@@ -53,9 +67,13 @@ final class Item extends EventSourcedAggregateRoot
     {
         $item = new Item();
 
-        $item->apply(new ImageWasRemovedFromItem($image));
+        foreach ($item->images as $value) {
+            if ($value->getImageId() === $image->getImageId()) {
+                $item->apply(new ImageWasRemovedFromItem($image));
+            }
+        }
     }
-    
+
     public function addStatus(Status $status)
     {
         $item = new Item();
@@ -70,28 +88,28 @@ final class Item extends EventSourcedAggregateRoot
         $item->apply(new StatusOfItemWasUpdated($status));
     }
 
-    public function addPrice(Money $price)
+    public function addPrice(Price $price)
     {
         $item = new Item();
 
         $item->apply(new PriceWasAddedToItem($price));
     }
 
-    public function updatePrice(Money $price)
+    public function updatePrice(Price $price)
     {
         $item = new Item();
 
         $item->apply(new PriceOfItemWasUpdated($price));
     }
 
-    public function addShippingCosts(Money $price)
+    public function addShippingCosts(ShippingCosts $price)
     {
         $item = new Item();
 
         $item->apply(new ShippingCostsWereAddedToItem($price));
     }
 
-    public function updateShippingCosts(Money $price)
+    public function updateShippingCosts(ShippingCosts $price)
     {
         $item = new Item();
 
@@ -101,23 +119,25 @@ final class Item extends EventSourcedAggregateRoot
     protected function applyItemWasCreated(ItemWasCreated $event)
     {
         $this->initialize(
-            $event->getItemId(),
-            $event->getItemName()
+            $event->getId(),
+            $event->getName(),
+            $event->getStatus(),
+            $event->getPrice(),
+            $event->getShippingCosts(),
+            $event->getNotes()
         );
     }
 
     protected function applyImageWasAddedToItem(ImageWasAddedToItem $event)
     {
-        $this->images[] = $event->getImage();
+        $imageId                = (string) $event->getImage()->getImageId();
+        $this->images[$imageId] = $event->getImage();
     }
 
     protected function applyImageWasRemovedFromItem(ImageWasRemovedFromItem $event)
     {
-        foreach ($this->images as $key => $image) {
-            if ($image->getId() === $event->getImage()->getId()) {
-                unset($this->images[$key]);
-            }
-        }
+        $imageId = (string) $event->getImage()->getImageId();
+        unset($this->images[$imageId]);
     }
 
     protected function applyStatusWasAddedToItem(StatusWasAddedToItem $event)

@@ -10,6 +10,6 @@ class ItemProjector extends Projector
     {
         $readModel = new ItemReadModel();
 
-        $readModel->name = $event->getItemName();
+        $readModel->name = $event->getName();
     }
 }

@@ -4,10 +4,12 @@ namespace Packrat\Collection;
 
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use Packrat\Item\Item;
+use Packrat\User\UserId;
 
 final class Collection extends EventSourcedAggregateRoot
 {
-    private $id;
+    private $collectionId;
+    private $collectionName;
     private $userId;
 
     /**
@@ -19,18 +21,19 @@ final class Collection extends EventSourcedAggregateRoot
     {
     }
 
-    private function initialize(Id $collectionId, Id $userId)
+    private function initialize(CollectionId $collectionId, CollectionName $collectionName, UserId $userId)
     {
-        $this->id     = $collectionId;
-        $this->userId = $userId;
+        $this->collectionId   = $collectionId;
+        $this->collectionName = $collectionName;
+        $this->userId         = $userId;
     }
 
-    public function getAggregateRootId(): Id
+    public function getAggregateRootId(): CollectionId
     {
-        return $this->id;
+        return $this->collectionId;
     }
 
-    public static function start(Id $collectionId, CollectionName $collectionName, Id $userId): Collection
+    public static function start(CollectionId $collectionId, CollectionName $collectionName, UserId $userId): Collection
     {
         $collection = new Collection();
 
@@ -39,7 +42,7 @@ final class Collection extends EventSourcedAggregateRoot
         return $collection;
     }
 
-    public static function remove(Id $collectionId, Id $userId)
+    public static function remove(CollectionId $collectionId, UserId $userId)
     {
         $collection = new Collection();
 
@@ -48,18 +51,19 @@ final class Collection extends EventSourcedAggregateRoot
 
     public function addItem(Item $item)
     {
-        $this->apply(new ItemWasAddedToCollection($this->id, $item));
+        $this->apply(new ItemWasAddedToCollection($this->collectionId, $item));
     }
 
     public function removeItem(Item $item)
     {
-        $this->apply(new ItemWasRemovedFromCollection($this->id, $item));
+        $this->apply(new ItemWasRemovedFromCollection($this->collectionId, $item));
     }
 
     protected function applyCollectionWasStarted(CollectionWasStarted $event)
     {
         $this->initialize(
             $event->getCollectionId(),
+            $event->getCollectionName(),
             $event->getUserId()
         );
     }

@@ -6,7 +6,7 @@ use Broadway\CommandHandling\SimpleCommandBus;
 use Broadway\EventHandling\SimpleEventBus;
 use Broadway\EventStore\InMemoryEventStore;
 use Packrat\Collection\Collection;
-use Packrat\Collection\CollectionId;
+use Packrat\Collection\Id;
 use Packrat\Collection\CollectionName;
 use Packrat\Collection\CollectionProjector;
 use Packrat\Collection\CollectionRepository;
@@ -20,5 +20,5 @@ $collectionRepository = new CollectionRepository($eventStore, $eventBus);
 $collectionProjector = new CollectionProjector();
 $eventBus->subscribe($collectionProjector);
 
-$collection = Collection::start(CollectionId::generate(), new CollectionName('bla'), UserId::generate());
+$collection = Collection::start(Id::generate(), new CollectionName('bla'), UserId::generate());
 $collectionRepository->save($collection);

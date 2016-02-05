@@ -9,13 +9,13 @@ final class ItemWasAddedToCollection
     private $collectionId;
     private $item;
 
-    public function __construct(Id $collectionId, Item $item)
+    public function __construct(CollectionId $collectionId, Item $item)
     {
         $this->collectionId = $collectionId;
         $this->item         = $item;
     }
 
-    public function getCollectionId(): Id
+    public function getCollectionId(): CollectionId
     {
         return $this->collectionId;
     }

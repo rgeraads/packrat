@@ -2,18 +2,16 @@
 
 namespace Packrat\Item;
 
-use Money\Money;
-
 final class PriceWasAddedToItem
 {
     private $price;
 
-    public function __construct(Money $price)
+    public function __construct(Price $price)
     {
         $this->price = $price;
     }
 
-    public function getPrice(): Money
+    public function getPrice(): Price
     {
         return $this->price;
     }

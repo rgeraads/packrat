@@ -9,13 +9,13 @@ final class RemoveCollection
     private $collectionId;
     private $userId;
 
-    public function __construct(Id $collectionId, UserId $userId)
+    public function __construct(CollectionId $collectionId, UserId $userId)
     {
         $this->collectionId = $collectionId;
         $this->userId       = $userId;
     }
 
-    public function getCollectionId(): Id
+    public function getCollectionId(): CollectionId
     {
         return $this->collectionId;
     }

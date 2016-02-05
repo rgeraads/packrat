@@ -34,9 +34,9 @@ final class Status
 
     private $status;
 
-    public function __construct(string $status)
+    private function __construct(string $status)
     {
-        Assert::inArray($status, self::AVAILABLE_STATUSES);
+        $this->guardStatusExists($status);
 
         $this->status = $status;
     }
@@ -99,5 +99,10 @@ final class Status
     public function __toString(): string
     {
         return $this->status;
+    }
+
+    private function guardStatusExists(string $status)
+    {
+        Assert::inArray($status, self::AVAILABLE_STATUSES);
     }
 }
