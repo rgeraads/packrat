@@ -3,6 +3,6 @@ PackratBundle\Entity\User:
     table: user
     id:
         id:
-            type: integer
+            type: string
             generator:
-                strategy: AUTO
+                strategy: UUID

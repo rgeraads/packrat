@@ -15,7 +15,7 @@ final class Collection extends EventSourcedAggregateRoot
     /**
      * @var Item[]
      */
-    private $items = [];
+    private $items;
 
     private function __construct()
     {
@@ -42,11 +42,9 @@ final class Collection extends EventSourcedAggregateRoot
         return $collection;
     }
 
-    public static function remove(CollectionId $collectionId, UserId $userId)
+    public function remove(CollectionId $collectionId, UserId $userId)
     {
-        $collection = new Collection();
-
-        $collection->apply(new CollectionWasRemoved($collectionId, $userId));
+        $this->apply(new CollectionWasRemoved($collectionId, $userId));
     }
 
     public function addItem(Item $item)
@@ -56,29 +54,27 @@ final class Collection extends EventSourcedAggregateRoot
 
     public function removeItem(Item $item)
     {
-        $this->apply(new ItemWasRemovedFromCollection($this->collectionId, $item));
+        foreach ($this->items as $value) {
+            if ($value->getAggregateRootId() === $item->getAggregateRootId()) {
+                $this->apply(new ItemWasRemovedFromCollection($this->collectionId, $item));
+            }
+        }
     }
 
     protected function applyCollectionWasStarted(CollectionWasStarted $event)
     {
-        $this->initialize(
-            $event->getCollectionId(),
-            $event->getCollectionName(),
-            $event->getUserId()
-        );
+        $this->initialize($event->getCollectionId(), $event->getCollectionName(), $event->getUserId());
     }
 
     protected function applyItemWasAddedToCollection(ItemWasAddedToCollection $event)
     {
-        $this->items[] = $event->getItem();
+        $itemId               = (string) $event->getItem()->getAggregateRootId();
+        $this->items[$itemId] = $event->getItem();
     }
 
-    protected function applyItemWasRemovedFromCollection(ItemWasAddedToCollection $event)
+    protected function applyItemWasRemovedFromCollection(ItemWasRemovedFromCollection $event)
     {
-        foreach ($this->items as $key => $item) {
-            if ($item->getAggregateRootId() === $event->getItem()->getAggregateRootId()) {
-                unset($this->items[$key]);
-            }
-        }
+        $itemId = (string) $event->getItem()->getAggregateRootId();
+        unset($this->items[$itemId]);
     }
 }

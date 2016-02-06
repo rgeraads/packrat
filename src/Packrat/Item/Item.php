@@ -7,7 +7,8 @@ use Broadway\EventSourcing\EventSourcedAggregateRoot;
 final class Item extends EventSourcedAggregateRoot
 {
     private $itemId;
-    private $itemName;
+    private $name;
+    private $category;
 
     /**
      * @var Image[]
@@ -16,26 +17,16 @@ final class Item extends EventSourcedAggregateRoot
     private $status;
     private $price;
     private $shippingCosts;
-    private $notes;
 
     private function __construct()
     {
     }
 
-    private function initialize(
-        ItemId $itemId,
-        ItemName $itemName,
-        Status $status,
-        Price $price,
-        ShippingCosts $shippingCosts,
-        Notes $notes
-    ) {
-        $this->itemId        = $itemId;
-        $this->itemName      = $itemName;
-        $this->status        = $status;
-        $this->price         = $price;
-        $this->shippingCosts = $shippingCosts;
-        $this->notes         = $notes;
+    private function initialize(ItemId $itemId, ItemName $name, Category $category)
+    {
+        $this->itemId   = $itemId;
+        $this->name     = $name;
+        $this->category = $category;
     }
 
     public function getAggregateRootId(): ItemId
@@ -43,100 +34,73 @@ final class Item extends EventSourcedAggregateRoot
         return $this->itemId;
     }
 
-    public static function create(
-        ItemId $itemId,
-        ItemName $itemName,
-        Status $status,
-        Price $price,
-        ShippingCosts $shippingCosts,
-        Notes $notes
-    ) {
+    public static function create(ItemId $itemId, ItemName $name, Category $category): Item
+    {
         $item = new Item();
 
-        $item->apply(new ItemWasCreated($itemId, $itemName, $status, $price, $shippingCosts, $notes));
+        $item->apply(new ItemWasCreated($itemId, $name, $category));
+
+        return $item;
     }
 
     public function addImage(Image $image)
     {
-        $item = new Item();
-
-        $item->apply(new ImageWasAddedToItem($image));
+        $this->apply(new ImageWasAddedToItem($image));
     }
 
     public function removeImage(Image $image)
     {
-        $item = new Item();
-
-        foreach ($item->images as $value) {
-            if ($value->getImageId() === $image->getImageId()) {
-                $item->apply(new ImageWasRemovedFromItem($image));
+        foreach ($this->images as $value) {
+            if ($value->getId() === $image->getId()) {
+                $this->apply(new ImageWasRemovedFromItem($image));
             }
         }
     }
 
     public function addStatus(Status $status)
     {
-        $item = new Item();
-
-        $item->apply(new StatusWasAddedToItem($status));
+        $this->apply(new StatusWasAddedToItem($status));
     }
 
     public function updateStatus(Status $status)
     {
-        $item = new Item();
-
-        $item->apply(new StatusOfItemWasUpdated($status));
+        $this->apply(new StatusOfItemWasUpdated($status));
     }
 
     public function addPrice(Price $price)
     {
-        $item = new Item();
-
-        $item->apply(new PriceWasAddedToItem($price));
+        $this->apply(new PriceWasAddedToItem($price));
     }
 
     public function updatePrice(Price $price)
     {
-        $item = new Item();
-
-        $item->apply(new PriceOfItemWasUpdated($price));
+        $this->apply(new PriceOfItemWasUpdated($price));
     }
 
     public function addShippingCosts(ShippingCosts $price)
     {
-        $item = new Item();
-
-        $item->apply(new ShippingCostsWereAddedToItem($price));
+        $this->apply(new ShippingCostsWereAddedToItem($price));
     }
 
     public function updateShippingCosts(ShippingCosts $price)
     {
-        $item = new Item();
-
-        $item->apply(new ShippingCostsOfItemWereUpdated($price));
+        $this->apply(new ShippingCostsOfItemWereUpdated($price));
     }
 
     protected function applyItemWasCreated(ItemWasCreated $event)
     {
-        $this->initialize(
-            $event->getId(),
-            $event->getName(),
-            $event->getStatus(),
-            $event->getPrice(),
-            $event->getShippingCosts(),
-            $event->getNotes()
-        );
+        $this->initialize($event->getId(), $event->getName(), $event->getCategory());
     }
 
     protected function applyImageWasAddedToItem(ImageWasAddedToItem $event)
     {
-        $imageId                = (string) $event->getImage()->getImageId();
+        $imageId                = (string) $event->getImage()->getId();
         $this->images[$imageId] = $event->getImage();
     }
 
     protected function applyImageWasRemovedFromItem(ImageWasRemovedFromItem $event)
     {
-        $imageId = (string) $event->getImage()->getImageId();
+        $imageId = (string) $event->getImage()->getId();
         unset($this->images[$imageId]);
     }
 

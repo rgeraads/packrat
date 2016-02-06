@@ -10,8 +10,7 @@ final class CollectionName
 
     public function __construct(string $name)
     {
-        $this->guardMinLength($name);
-        $this->guardMaxLength($name);
+        Assert::betweenLength($name, 1, 255);
 
         $this->name = $name;
     }
@@ -19,15 +18,5 @@ final class CollectionName
     public function __toString(): string
     {
         return $this->name;
-    }
-
-    private function guardMinLength(string $name)
-    {
-        Assert::minLength($name, 1);
-    }
-
-    private function guardMaxLength(string $name)
-    {
-        Assert::maxLength($name, 255);
     }
 }

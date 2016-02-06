@@ -26,11 +26,7 @@ final class StartCollectionController
     {
         $collectionId = CollectionId::generate();
 
-        $this->commandBus->dispatch(new StartCollection(
-            $collectionId,
-            $collectionName,
-            $userId
-        ));
+        $this->commandBus->dispatch(new StartCollection($collectionId, $collectionName, $userId));
 
         return new JsonResponse(['id' => (string) $collectionId], JsonResponse::HTTP_CREATED);
     }
