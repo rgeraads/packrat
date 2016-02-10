@@ -1,9 +1,12 @@
 ---
 - name: Packrat Provisioning
   hosts: all
-  sudo: yes
+  become: yes
 
   tasks:
+  - name: add php7.0 repository
+    apt_repository: repo='ppa:ondrej/php'
+
   - name: update packages
     apt: update_cache=yes
 
@@ -11,17 +14,34 @@
     apt: name={{ item }} state=latest
     with_items:
       - vim
-      - php5-fpm
-      - php5-cli
-      - php5-intl
       - mysql-server
-      - php5-mysql
-      - php5-xdebug
-      - nginx-light
       - python-mysqldb
+      - php7.0
+      - php7.0-fpm
+      - php7.0-mysql
+      - php-xdebug
+      - nginx
+
+  - name: unlink default nginx configuration
+    file: path=/etc/nginx/sites-enabled/default state=absent
+
+  - name: delete default nginx configuration
+    file: path=/etc/nginx/sites-available/default state=absent
+
+  - name: copy nginx packrat configuration
+    template: src=templates/nginx.cfg.j2 dest=/etc/nginx/sites-available/packrat
+
+  - name: enable nginx packrat configuration
+    file: src=/etc/nginx/sites-available/packrat dest=/etc/nginx/sites-enabled/packrat state=link
 
   - name: create database
     mysql_db: name=packrat state=present
 
   - name: create database user
     mysql_user: name=vagrant password=vagrant host=% priv=*.*:ALL state=present
+
+  - name: update database schema
+    shell: /vagrant/bin/console doctrine:schema:update --force
+
+  - name: restart nginx
+    service: name=nginx state=restarted
