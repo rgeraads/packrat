@@ -20,6 +20,7 @@
       - php7.0-fpm
       - php7.0-mysql
       - php-xdebug
+      - php-xml
       - nginx
 
   - name: unlink default nginx configuration
@@ -39,6 +40,9 @@
 
   - name: create database user
     mysql_user: name=vagrant password=vagrant host=% priv=*.*:ALL state=present
+
+  - name: allow remote mysql connections
+    lineinfile: dest=/etc/mysql/my.cnf regexp='bind-address\s*=\s*127\.0\.0\.1\s*' line='bind-address = 0.0.0.0' state=present
 
   - name: update database schema
     shell: /vagrant/bin/console doctrine:schema:update --force
