@@ -5,10 +5,10 @@
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <button class="btn btn-primary" type="submit"><i class="material-icons">save</i></button>
+        <button class="btn btn-primary pull-left" type="submit"><i class="material-icons">save</i></button>
     {{ form_end(form) }}
 
-    <button class="btn btn-default">
+    <button class="btn btn-default pull-left">
         <a href="{{ path('item_index') }}"><i class="material-icons">chevron_left</i></a>
     </button>
 {% endblock %}

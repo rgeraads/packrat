@@ -6,17 +6,17 @@ use Assert\Assertion as Assert;
 
 final class Status
 {
-    const NOT_OWNED       = 'notOwned';
-    const TO_BE_ANNOUNCED = 'toBeAnnounced';
-    const PRE_ORDERED     = 'preOrdered';
-    const ORDERED         = 'ordered';
-    const PAID            = 'paid';
-    const SHIPPED         = 'shipped';
-    const CUSTOMS         = 'customs';
-    const OWNED           = 'owned';
-    const UNAVAILABLE     = 'unavailable';
-    const CANCELLED       = 'cancelled';
-    const UNKNOWN         = 'unknown';
+    const NOT_OWNED       = 'Not owned';
+    const TO_BE_ANNOUNCED = 'To be announced';
+    const PRE_ORDERED     = 'Pre-ordered';
+    const ORDERED         = 'Ordered';
+    const PAID            = 'Paid';
+    const SHIPPED         = 'Shipped';
+    const CUSTOMS         = 'Customs';
+    const OWNED           = 'Owned';
+    const UNAVAILABLE     = 'Unavailable';
+    const CANCELLED       = 'Cancelled';
+    const UNKNOWN         = 'Unknown';
 
     const AVAILABLE_STATUSES = [
         self::NOT_OWNED,

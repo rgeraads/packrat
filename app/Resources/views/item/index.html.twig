@@ -18,6 +18,7 @@
         <thead>
             <tr>
                 <th>Name</th>
+                <th></th>
                 <th>Url</th>
                 <th>Status</th>
                 <th>Price</th>
@@ -29,6 +30,7 @@
         {% for item in items %}
             <tr>
                 <td><a href="{{ path('item_show', { 'id': item.id }) }}">{{ item.name }}</a> <a href="{{ path('item_edit', { 'id': item.id }) }}"><i class="material-icons">mode_edit</i></a></td>
+                <td><a href="{{ path('item_show', { 'id': item.id }) }}"><img src="{{ item.imageLocation }}" height="42" width="42" alt="..." /></a></td>
                 <td><a href="{{ item.url }}" title="{{ item.url | length > 64 ? item.url : '' }}" target="_blank">{{ item.url | length > 64 ? item.url | slice(0, 64) ~ '...' : item.url }}</a></td>
                 <td>{{ item.status }}</td>
                 <td>{{ item.currency }} {{ item.price | number_format(2) }}</td>

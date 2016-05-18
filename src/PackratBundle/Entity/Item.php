@@ -2,6 +2,8 @@
 
 namespace PackratBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Item
  */
@@ -24,6 +26,8 @@ class Item
 
     /**
      * @var string
+     *
+     * @Assert\Image
      */
     private $imageLocation;
 

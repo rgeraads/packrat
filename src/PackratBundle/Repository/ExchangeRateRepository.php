@@ -69,6 +69,15 @@ class ExchangeRateRepository extends EntityRepository
         }
     }
 
+    public function addOrRefresh(Currency $currency)
+    {
+        if ($this->findOneBy(['currency' => $currency]) === null) {
+            $this->add($currency);
+        } else {
+            $this->refresh($currency);
+        }
+    }
+
     /**
      * @param Currency $currency
      *

@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Request;
  */
 class ItemController extends Controller
 {
+    const IMAGES_DIR = '/uploads/images/';
+
     /**
      * Lists all Item entities.
      *
@@ -39,6 +41,8 @@ class ItemController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $item->setImageLocation(self::IMAGES_DIR . $this->saveImage($item));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
@@ -60,17 +64,9 @@ class ItemController extends Controller
     {
         $deleteForm = $this->createDeleteForm($item);
 
-        $exchangeRate = '';
-        if ($item->getCurrency() !== 'EUR') {
-            $em           = $this->getDoctrine()->getManager();
-            $exchangeRate = $em->getRepository('PackratBundle:ExchangeRate')
-                ->findOneBy(['currency' => $item->getCurrency()])->getToEur();
-        }
-
         return $this->render('item/show.html.twig', [
-            'item'          => $item,
-            'exchange_rate' => $exchangeRate,
-            'delete_form'   => $deleteForm->createView(),
+            'item'        => $item,
+            'delete_form' => $deleteForm->createView(),
         ]);
     }
 
@@ -80,11 +76,19 @@ class ItemController extends Controller
      */
     public function editAction(Request $request, Item $item)
     {
+        $savedImage = $item->getImageLocation();
+
         $deleteForm = $this->createDeleteForm($item);
         $editForm   = $this->createForm(ItemType::class, $item);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
+            if ($item->getImageLocation()) {
+                $item->setImageLocation(self::IMAGES_DIR . $this->saveImage($item));
+            } elseif ($savedImage) {
+                $item->setImageLocation($savedImage);
+            }
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($item);
             $em->flush();
@@ -130,5 +134,21 @@ class ItemController extends Controller
             ->setAction($this->generateUrl('item_delete', ['id' => $item->getId()]))
             ->setMethod('DELETE')
             ->getForm();
+    }
+
+    /**
+     * @param $item
+     *
+     * @return string
+     */
+    private function saveImage(Item $item)
+    {
+        /** @var \Symfony\Component\HttpFoundation\File\UploadedFile $file */
+        $file     = $item->getImageLocation();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+        $imageDir = $this->container->getParameter('kernel.root_dir') . '/../web/uploads/images';
+        $file->move($imageDir, $fileName);
+
+        return $fileName;
     }
 }

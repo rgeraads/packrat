@@ -11,7 +11,7 @@ class ExchangeRateController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $em->getRepository('PackratBundle:ExchangeRate')->add($currency);
+        $em->getRepository('PackratBundle:ExchangeRate')->addOrRefresh($currency);
 
         return $this->redirect('PackratBundle:Item:index.html.twig');
     }

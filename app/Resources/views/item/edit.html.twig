@@ -2,17 +2,23 @@
 
 {% block body %}
     <h1>Edit item</h1>
-
+    <div class="col-lg-3">
+        <a href="#" class="thumbnail">
+            <img src="{{ item.imageLocation }}" alt="..." />
+        </a>
+    </div>
+    <div class="col-lg-9">
     {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <button class="btn btn-primary" type="submit"><i class="material-icons">save</i></button>
+        <button class="btn btn-primary pull-left" type="submit"><i class="material-icons">save</i></button>
     {{ form_end(edit_form) }}
 
-    <button class="btn btn-default">
+    <button class="btn btn-default pull-left">
         <a href="{{ path('item_index') }}"><i class="material-icons">chevron_left</i></a>
     </button>
 
     {{ form_start(delete_form) }}
-        <button class="btn btn-danger" type="submit"><i class="material-icons">delete</i></button>
+        <button class="btn btn-danger pull-right" type="submit"><i class="material-icons">delete</i></button>
     {{ form_end(delete_form) }}
+    </div>
 {% endblock %}
